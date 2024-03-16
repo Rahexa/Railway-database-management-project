@@ -30,22 +30,6 @@
             justify-content: space-between;
             align-items: center;
         }
-        .login-box input[type="date"] {
-    height: 40px;
-    margin-bottom: 10px;
-    padding: 0 20px;
-    vertical-align: middle;
-    background: #fff;
-    border: none;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 30;
-    line-height: 40px;
-    color: #888;
-    border-radius: 5px;
-    width: calc(100% - 16px); /* Adjusted width */
-}
-
 
         .header h1 {
             margin: 0;
@@ -55,18 +39,16 @@
         }
 
         .rail-logo {
-             width: 100px;
-            /* Adjust logo size */
+            width: 100px;
             height: auto;
             margin: 0 10px;
-            /* Adjust margin */
             margin-top: 30px;
         }
 
         /* Login Page Styles */
         .login-page {
-            padding: 200px 0 100px 0; /* Adjusted padding to move the signup form further below */            background-image: url('image/metro1.jpg');
-
+            padding: 200px 0 100px 0;
+            background-image: url('image/metro1.jpg');
             background-size: cover;
             background-position: center;
             height: 105vh;
@@ -89,17 +71,6 @@
             text-align: center;
         }
 
-        .login-text p {
-            margin-top: 20px;
-            font-size: 22px;
-            line-height: 36px;
-            text-shadow: 0 1px 5px rgba(51, 51, 51, 0.4);
-            color: #fff;
-        }
-.login-box i {
-    color: lightslategrey; /* Change to the desired color */
-}
-
         .login-box {
             background-color: rgba(0, 0, 0, 0.5);
             margin: auto auto;
@@ -114,7 +85,8 @@
         .login-box input[type="text"],
         .login-box input[type="password"],
         .login-box input[type="email"],
-        .login-box select {
+        .login-box select,
+        .login-box input[type="date"] {
             height: 40px;
             margin-bottom: 10px;
             padding: 0 20px;
@@ -133,31 +105,31 @@
         .login-box input[type="text"]:focus,
         .login-box input[type="password"]:focus,
         .login-box input[type="email"]:focus,
-        .login-box select:focus {
+        .login-box select:focus,
+        .login-box input[type="date"]:focus {
             outline: 0;
             background: #fff;
             border: 3px solid #2ba560;
         }
 
-        .login-box input.input-error {
-            border-color: #e7603c;
-        }
-
         .login-box input[type="text"]::-moz-placeholder,
         .login-box input[type="password"]::-moz-placeholder,
-        .login-box input[type="email"]::-moz-placeholder {
+        .login-box input[type="email"]::-moz-placeholder,
+        .login-box input[type="date"]::-moz-placeholder {
             color: #888;
         }
 
         .login-box input[type="text"]:-ms-input-placeholder,
         .login-box input[type="password"]:-ms-input-placeholder,
-        .login-box input[type="email"]:-ms-input-placeholder {
+        .login-box input[type="email"]:-ms-input-placeholder,
+        .login-box input[type="date"]:-ms-input-placeholder {
             color: #888;
         }
 
         .login-box input[type="text"]::-webkit-input-placeholder,
         .login-box input[type="password"]::-webkit-input-placeholder,
-        .login-box input[type="email"]::-webkit-input-placeholder {
+        .login-box input[type="email"]::-webkit-input-placeholder,
+        .login-box input[type="date"]::-webkit-input-placeholder {
             color: #888;
         }
 
@@ -167,7 +139,7 @@
             margin: 10px 0;
             padding: 0 20px;
             vertical-align: middle;
-            background: green;
+            background: #00802b;
             border: none;
             font-family: 'Open Sans', sans-serif;
             font-size: 18px;
@@ -192,6 +164,17 @@
             color: #BBB;
             text-align: center;
         }
+
+        /* Success Message Styles */
+        .success-message {
+            color:  #00cc44;
+            font-size: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-top: -20px;
+            font-weight: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -200,13 +183,13 @@
         <h1>Bangladesh Railway</h1>
         <img class="rail-logo" src="image/mlogo.png" alt="Right Logo">
     </div>
-    <?php if(isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <div style="background-color: green; color: white; padding: 10px; text-align: center;">Registration Successful!</div>
-    <?php endif; ?>
     <div class="login-page">
         <div class="login-text">
             <div class="login-box">
                 <h2>Sign Up</h2>
+                <?php if(isset($_GET['success']) && $_GET['success'] == 1): ?>
+                    <div class="success-message">Registration Successful!</div>
+                <?php endif; ?>
                 <form action="connection.php" method="post">
                     <div style="display: flex; justify-content: space-between;">
                         <div style="width: 48%;">
@@ -227,8 +210,7 @@
                         <div style="width: 48%;">
                             <label for="password">Password:</label>
                             <input type="password" name="password" placeholder="Enter your password" required>
-<i class="fas fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
-
+                            <i class="fas fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
                         </div>
                     </div>
 
@@ -263,24 +245,23 @@
 
                     <button class="btn" type="submit">Sign Up</button>
                 </form>
-<p style="color: white; margin-top: 10px;">Already have an account? <a href="login.php" style="color: deepskyblue;">Sign in</a>.</p>            </div>
+                <p style="color: white; margin-top: 10px;">Already have an account? <a href="login.php" style="color: deepskyblue;">Sign in</a>.</p>
+            </div>
         </div>
     </div>
-<script>
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('input[name="password"]');
 
-    togglePassword.addEventListener('click', function (e) {
-        // toggle the type attribute
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        // toggle the eye icon class
-        this.classList.toggle('fa-eye');
-        this.classList.toggle('fa-eye-slash');
-    });
-</script>
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('input[name="password"]');
 
-
-
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye icon class
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </body>
 </html>
